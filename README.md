@@ -20,3 +20,11 @@ Test API at http://localhost:3000 on route below
 | PUT    | /me              |
 | DELETE | /me              |
 | PUT    | /change-password |
+
+## 3. Coding (Cart)
+
+```bash
+$ npm run test
+```
+
+Code is in <code>src/domain/cart/cart.entity.ts</code> and <code>src/domain/cart/cart.entity.spec.ts</code>
