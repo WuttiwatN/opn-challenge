@@ -1,0 +1,31 @@
+import {
+  CallHandler,
+  ExecutionContext,
+  Injectable,
+  NestInterceptor,
+} from '@nestjs/common'
+
+import { Observable } from 'rxjs'
+import { map } from 'rxjs/operators'
+
+@Injectable()
+export class ResponseMiddleware implements NestInterceptor {
+  intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
+    return next
+      .handle()
+      .pipe(map((res: unknown) => this.responseHandler(res, context)))
+  }
+
+  responseHandler(res: unknown, context: ExecutionContext) {
+    const ctx = context.switchToHttp()
+    const response = ctx.getResponse()
+
+    const statusCode = response.statusCode
+
+    return {
+      success: true,
+      statusCode,
+      data: res,
+    }
+  }
+}
