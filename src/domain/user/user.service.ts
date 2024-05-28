@@ -10,7 +10,7 @@ export class UserService {
     return mockUsersCollection[email]
   }
 
-  createUser(user: User): User | null {
+  createUser(user: User): User {
     const { email, password } = user
     return (mockUsersCollection[email] = {
       ...user,

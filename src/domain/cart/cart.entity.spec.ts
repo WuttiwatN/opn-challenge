@@ -259,6 +259,19 @@ describe('cart', () => {
 
         expect(cart.total()).toEqual(280)
       })
+
+      it('forget set max config', () => {
+        const cart = new CartEntity(mockCustomerId)
+
+        cart.add('product-1', 1)
+        cart.add('product-2', 1)
+        cart.addDiscount('discount-1', {
+          type: DiscountType.PERCENTAGE,
+          amount: 10,
+        })
+
+        expect(cart.total()).toEqual(270)
+      })
     })
 
     describe('multiple discount', () => {

@@ -8,7 +8,7 @@ import {
 
 import { Reflector } from '@nestjs/core'
 import { Request } from 'express'
-import { getUserIdFromToken } from '../helpers/token.helper'
+import { getEmailFromToken } from '../helpers/token.helper'
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -30,12 +30,12 @@ export class AuthGuard implements CanActivate {
       throw new UnauthorizedException()
     }
 
-    const email = getUserIdFromToken(token)
+    const email = getEmailFromToken(token)
     if (!email) {
       throw new UnauthorizedException()
     }
 
-    request['userInfo'] = { email }
+    request['tokenPayload'] = { email }
     return true
   }
 
